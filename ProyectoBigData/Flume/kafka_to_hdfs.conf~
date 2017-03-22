@@ -1,0 +1,12 @@
+agkaf.sinks = kHdfs
+agkaf.channels = chKafka
+
+agkaf.channels.chKafka.type = org.apache.flume.channel.kafka.KafkaChannel
+agkaf.channels.chKafka.kafka.bootstrap.servers = localhost:9092
+agkaf.channels.chKafka.kafka.topic = ineventos
+
+agkaf.sinks.kHdfs.type = hdfs
+agkaf.sinks.kHdfs.channel = chKafka
+agkaf.sinks.kHdfs.hdfs.path = hdfs://quickstart.cloudera:8020/master/pragsis/recomendador/raw
+agkaf.sinks.hkHdfs.hdfs.fileType = DataStream
+

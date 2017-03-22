@@ -1,0 +1,2 @@
+#Flume from dir to kafka
+sudo flume-ng agent      --conf-file /home/cloudera/Desktop/Proyecto/workspace/ProyectoBigData/Flume/kafkaToHdfs.conf      --name kafkaToHdfsD      -Dflume.rot.logger=INFO, console

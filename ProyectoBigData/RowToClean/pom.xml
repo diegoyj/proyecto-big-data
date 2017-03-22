@@ -1,0 +1,62 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.pragsis.master</groupId>
+  <artifactId>RowToClean</artifactId>
+  <version>0.0.1</version>
+  
+  <repositories>
+    <repository>
+      <id>apache-repo</id>
+      <name>Apache Repository</name>
+      <url>https://repository.apache.org/content/repositories/releases</url>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </repository>
+    <repository>
+         <id>cloudera</id>
+         <url>https://repository.cloudera.com/artifactory/cloudera-repos/</url>
+     </repository>
+  </repositories>
+
+  <build>
+        <plugins>
+            <plugin>
+                <groupId>org.scala-tools</groupId>
+                <artifactId>maven-scala-plugin</artifactId>
+                <!-- <goals>
+                    <goal>compile</goal>
+                    <goal>testCompile</goal>
+                </goals> -->
+            </plugin>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.5</source>
+                    <target>1.5</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+  <dependencies>
+        <dependency>
+      <groupId>org.scala-lang</groupId>
+      <artifactId>scala-library</artifactId>
+      <version>2.11.7</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.spark</groupId>
+      <artifactId>spark-core_2.11</artifactId>
+      <version>1.6.0</version>
+    </dependency>
+    <dependency>
+         <groupId>org.apache.hbase</groupId>
+         <artifactId>hbase-client</artifactId>
+         <version>1.2.0-cdh5.8.0</version>
+     </dependency>
+    </dependencies>
+</project>
