@@ -1,0 +1,63 @@
+spark-submit \
+--class es.operation.PrepareData \
+--master local[*] \
+/home/cloudera/Desktop/ProjectJARs/RawToClean-0.0.1.jar
+
+
+spark-submit \
+--class es.generator.CalculateModel \
+--driver-memory 6g \
+--master local[*] \
+/home/cloudera/Desktop/ProjectJARs/RecomendadorModel-0.0.1.jar
+
+
+spark-submit \
+--class es.generator.CalculatorDefModel \
+--driver-memory 5g \
+--master local[*] \
+/home/cloudera/Desktop/ProjectJARs/RecomendadorModel-0.0.1.jar
+
+
+##LANZAR EVENTOS##
+java -jar /home/cloudera/Desktop/ProjectJARs/ProductorEventos-0.0.1.jar
+
+##CREAR TOPIC PARA RECIBIR EVENTOS##
+kafka-topics --create \
+--zookeeper localhost:2181/kafka \
+--replication-factor 1 \
+--partitions 1 \
+--topic ineventos
+
+##CREAR TOPIC PARA ENVIAR RECOMENDACIONES##
+kafka-topics --create \
+--zookeeper localhost:2181/kafka \
+--replication-factor 1 \
+--partitions 1 \
+--topic outrecomendacion
+
+
+##LEER EVENTOS DEL TOPIC##
+kafka-console-consumer --new-consumer \
+--bootstrap-server localhost:9092 \
+--topic ineventos
+
+kafka-console-consumer --new-consumer \
+--bootstrap-server localhost:9092 \
+--topic outrecomendacion
+
+
+##Vaciar topic##
+kafka-topics --delete --zookeeper localhost:2181/kafka --topic ineventos
+
+kafka-console-consumer --new-consumer \
+--bootstrap-server localhost:9092 \
+--topic outrecomendacion
+
+
+##LANZAR SPARK STREAMING RECOMENDACIONES##
+spark-submit \
+--class es.recomendador.SuggestGroup \
+--master local[*] \
+/home/cloudera/Desktop/ProjectJARs/RecomendadorSS-0.0.1.jar
+
+

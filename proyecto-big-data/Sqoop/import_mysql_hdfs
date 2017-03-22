@@ -1,0 +1,2 @@
+sqoop import --connect jdbc:mysql://localhost:3306/practica --username root --password cloudera --table clientes --as-textfile --target-dir /master/pragsis/recomendador/raw/usuarios  -m 1
+
